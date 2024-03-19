@@ -1,4 +1,5 @@
-const { compressVideo } = require("../handlers/compressVideoHandler");
+const { compressVideoHandler } = require("../handlers/compressVideoHandler");
+const { convertToMp3Handler } = require("../handlers/convertToMp3Handler");
 
 function getDuration(secs) {
   var hours = Math.floor(secs / (60 * 60));
@@ -19,14 +20,14 @@ function getDuration(secs) {
   );
 }
 
-function selectProcess(data, bot, id) {
+function selectProcess(data, id) {
   switch (data) {
     case "compress":
-      return compressVideo(bot, id);
-    case "button2":
-      return "button2";
-    case "button3":
-      return "button3";
+      return compressVideoHandler(id);
+    case "imageCompress":
+      return "imageCompress";
+    case "videoTomp3":
+      return convertToMp3Handler(id);
     case "button4":
       return "button4";
     default:

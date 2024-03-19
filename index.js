@@ -1,24 +1,27 @@
 const express = require("express");
-const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
-const config = require("./config/config.js");
+const config = require("./config/bot.js");
 const { onStart, onCallbackQuery } = require("./handlers/onboardHandler.js");
+const ffmpeg = require("fluent-ffmpeg");
+const bot = require("./config/bot.js");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+ffmpeg.setFfmpegPath( process.env.FFMPEG_PATH || "C:/ffmpeg/bin/ffmpeg.exe");
+ffmpeg.setFfprobePath(process.env.FFMPEG_PROBE_PATH || "C:/ffmpeg/bin");
+ffmpeg.setFlvtoolPath(process.env.FFMPEG_FLV_TOOL_PATH || "C:/flvtool");
+
 const TOKEN = config.botToken;
-const bot = new TelegramBot(TOKEN, { polling: true });
 
 app.get("/", async (req, res) => {
   res.send("Hello World!");
 });
 
-bot.onText(/\/start/, (msg) => onStart(bot, msg));
+bot.onText(/\/start/, (msg) => onStart(msg));
 
-bot.on("callback_query", (callbackQuery) =>
-  onCallbackQuery(bot, callbackQuery)
-);
+bot.on("callback_query", (callbackQuery) => onCallbackQuery(callbackQuery));
+
 
 app.listen(PORT, () => {
   console.log("Server is running on port" + PORT);
