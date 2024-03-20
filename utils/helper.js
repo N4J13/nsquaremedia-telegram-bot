@@ -1,3 +1,4 @@
+const { compressImageHandler } = require("../handlers/compressImageHandler");
 const { compressVideoHandler } = require("../handlers/compressVideoHandler");
 const { convertToMp3Handler } = require("../handlers/convertToMp3Handler");
 
@@ -25,7 +26,7 @@ function selectProcess(data, id) {
     case "compress":
       return compressVideoHandler(id);
     case "imageCompress":
-      return "imageCompress";
+      return compressImageHandler(id);
     case "videoTomp3":
       return convertToMp3Handler(id);
     case "button4":
