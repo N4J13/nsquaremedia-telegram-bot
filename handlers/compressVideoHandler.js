@@ -13,7 +13,6 @@ const compressVideoHandler = ( chatId) => {
       downloadedVideoPath = await downloadVideo({
         folderName: "compress",
         msg,
-        bot,
       });
 
       bot.sendMessage(chatId, "Compressing video...");
