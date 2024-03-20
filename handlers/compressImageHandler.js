@@ -4,8 +4,8 @@ const { compressImage } = require("../utils/compressImage");
 const { downloadImage } = require("../utils/downloadImage");
 
 const compressImageHandler = (chatId) => {
-  // Send a message to the user to send an image to compress
 
+  // Send a message to the user to send an image to compress
   bot.sendMessage(chatId, "Send me an image to compress");
 
   // Listen for an image message from the user
@@ -14,7 +14,7 @@ const compressImageHandler = (chatId) => {
     const chatId = msg.chat.id;
 
     // Download the image from the message
-    const downloadedPath = await downloadImage("compress", msg);
+    const downloadedPath = await downloadImage("compressImage", msg);
 
     // Send a message to the user that the image is being compressed
     bot.sendMessage(chatId, "Compressing image...");
